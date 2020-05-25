@@ -1,7 +1,25 @@
-const isEqual = require('lodash').isEqual;
+const isEqual = require("lodash").isEqual;
 
 const valuesForKey = (pokeArray, key) => {
+  const values = [];
+  const theyHaveProperty = pokeArray.filter((object) =>
+    object.hasOwnProperty(key)
+  );
 
+  if (theyHaveProperty.length > 0) {
+    theyHaveProperty.map((element) => {
+      const value = element[key];
+      const exits = values.includes(value);
+      if (exits) {
+        return;
+      }
+      values.push(value);
+    });
+  } else {
+    console.log("No element has the given property");
+    return;
+  }
+  return values;
 };
 
 module.exports = valuesForKey;
