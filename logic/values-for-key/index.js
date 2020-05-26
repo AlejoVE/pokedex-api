@@ -7,21 +7,20 @@ const valuesForKey = (pokeArray, key) => {
   );
 
   if (theyHaveProperty.length > 0) {
-    theyHaveProperty.map((element) => {
-      const value = element[key];
-      const exits = values.includes(value);
-      if (exits) {
+    const valuesProperty = theyHaveProperty.map((pokemon) => pokemon[key]);
+    valuesProperty.forEach((value) => {
+      const toEvaluate = values.find((array) => isEqual(array, value));
+      const equals = isEqual(toEvaluate, value);
+      if (equals) {
         return;
       }
       values.push(value);
     });
   } else {
-    console.log("No element has the given property");
-    return;
+    console.log("No pokemon has the given property");
   }
   return values;
 };
-
 module.exports = valuesForKey;
 
 /* https://lodash.com/docs/4.17.15#isEqual
